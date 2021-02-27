@@ -1,4 +1,9 @@
+import { emptyAuthors, showAuthors } from '../components/authors';
 import signOut from '../helpers/auth/signOut';
+import { getAuthors, getFavoriteAuthors } from '../helpers/data/authorData';
+import { getBooks, getSaleBooks } from '../helpers/data/bookData';
+import { showBooks } from '../components/books';
+import addAuthorForm from '../components/forms/addAuthorForm';
 
 // navigation events
 const navigationEvents = () => {
@@ -8,14 +13,14 @@ const navigationEvents = () => {
 
   // BOOKS ON SALE
   document.querySelector('#sale-books').addEventListener('click', () => {
-    console.warn('Sale Books');
+    getSaleBooks().then((saleBooksArray) => showBooks(saleBooksArray));
   });
 
   // ALL BOOKS
   document.querySelector('#all-books').addEventListener('click', () => {
-    console.warn('All Books');
+    document.querySelector('#store').innerHTML = '';
+    getBooks().then((booksArray) => showBooks(booksArray));
   });
-
   // SEARCH
   document.querySelector('#search').addEventListener('keyup', (e) => {
     const searchValue = document.querySelector('#search').value.toLowerCase();
@@ -30,7 +35,18 @@ const navigationEvents = () => {
       document.querySelector('#search').value = '';
     }
   });
+  document.querySelector('#authors').addEventListener('click', () => {
+    addAuthorForm();
+    getAuthors().then((authors) => showAuthors(authors));
+    if (document.querySelector('#store').innerHTML === '') {
+      emptyAuthors();
+    }
+  });
 
+  document.querySelector('#favoriteAuthors').addEventListener('click', () => {
+    getFavoriteAuthors().then((authors) => showAuthors(authors));
+  });
+  // getAuthors().then((authors) => showAuthors(authors)));
   // FIXME: STUDENTS Create an event listener for the Authors
   // 1. When a user clicks the authors link, make a call to firebase to get all authors
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting
