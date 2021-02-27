@@ -11,6 +11,7 @@ const showAuthors = (array) => {
       <li class="list-group-item">${author.first_name}</li>
       <li class="list-group-item">${author.last_name}</li>
       <li class="list-group-item">${author.email}</li>
+      <button class="btn btn-danger" id="delete-author--${author.firebaseKey}">Delete author</button>
     </ul>
   </div>`;
   });

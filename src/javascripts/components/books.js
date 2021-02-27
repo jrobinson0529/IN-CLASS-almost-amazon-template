@@ -1,4 +1,5 @@
 const showBooks = (array) => {
+  document.querySelector('#store').innerHTML = '';
   document.querySelector('#add-button').innerHTML = '<button class="btn btn-success btn-lg mb-4" id="add-book-btn">Add A Book</button>';
 
   // document.querySelector('#store').innerHTML = '';
