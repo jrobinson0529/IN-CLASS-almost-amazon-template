@@ -4,9 +4,15 @@ const showAuthors = (array) => {
   document.querySelector('#store').innerHTML = '';
   // CREATE A BUTTON TO ADD BOOKS
 
-  array.forEach((item) => {
+  array.forEach((author) => {
     // FIXME: STUDENTS create cards for your authors
-    document.querySelector('#store').innerHTML += `${item}`;
+    document.querySelector('#store').innerHTML += `<div class="card" style="width: 18rem;">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">${author.first_name}</li>
+      <li class="list-group-item">${author.last_name}</li>
+      <li class="list-group-item">${author.email}</li>
+    </ul>
+  </div>`;
   });
 };
 

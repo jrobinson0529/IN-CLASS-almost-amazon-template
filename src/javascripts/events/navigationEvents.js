@@ -1,4 +1,6 @@
+import { emptyAuthors, showAuthors } from '../components/authors';
 import signOut from '../helpers/auth/signOut';
+import getAuthors from '../helpers/data/authorData';
 
 // navigation events
 const navigationEvents = () => {
@@ -30,7 +32,13 @@ const navigationEvents = () => {
       document.querySelector('#search').value = '';
     }
   });
-
+  document.querySelector('#authors').addEventListener('click', () => {
+    getAuthors().then((authors) => showAuthors(authors));
+    if (document.querySelector('#store').innerHTML === '') {
+      emptyAuthors();
+    }
+  });
+  // getAuthors().then((authors) => showAuthors(authors)));
   // FIXME: STUDENTS Create an event listener for the Authors
   // 1. When a user clicks the authors link, make a call to firebase to get all authors
   // 2. Convert the response to an array because that is what the makeAuthors function is expecting

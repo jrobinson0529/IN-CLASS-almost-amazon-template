@@ -1,4 +1,4 @@
-import { getAuthors } from '../../helpers/data/authorData';
+import getAuthors from '../../helpers/data/authorData';
 
 const selectAuthor = () => {
   let domString = `<label for="author">Select an Author</label>
