@@ -1,3 +1,5 @@
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import selectAuthor from './selectAuthor';
 
 const addBookForm = () => {
@@ -26,7 +28,7 @@ const addBookForm = () => {
       <button type="submit" id="submit-book" class="btn btn-primary">Submit Book</button>
     </form>`;
 
-  selectAuthor();
+  selectAuthor(firebase.auth().currentUser.uid);
 };
 
 export default addBookForm;
