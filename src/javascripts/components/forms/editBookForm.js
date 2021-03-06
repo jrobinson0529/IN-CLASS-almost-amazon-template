@@ -1,3 +1,7 @@
+// import firebase from 'firebase/app';
+import 'firebase/auth';
+import selectAuthor from './selectAuthor';
+
 const editBookForm = (bookObject) => {
   document.querySelector('#modal-body').innerHTML = `
     <form id="edit-book-form" class="mb-4">
@@ -21,6 +25,8 @@ const editBookForm = (bookObject) => {
       </div>
       <button type="submit" id="update-book--${bookObject.firebaseKey}" class="btn btn-success">Update Book</button>
     </form>`;
+
+  selectAuthor(bookObject);
 };
 
 export default editBookForm;

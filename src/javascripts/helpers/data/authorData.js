@@ -1,4 +1,6 @@
 // API CALLS FOR AUTHORS
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import axios from 'axios';
 import firebaseConfig from '../auth/apiKeys';
 
@@ -44,8 +46,19 @@ const getFavoriteAuthors = () => new Promise((resolve, reject) => {
     })
     .catch((error) => reject(error));
 });
+// GET A SINGLE AUTHOR
+const getSingleAuthor = (firebaseKey) => new Promise((resolve, reject) => {
+  axios.get(`${dbUrl}/authors/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
+    .catch((error) => reject(error));
+});
 // UPDATE AUTHOR
+const updateAuthor = (firebaseKey, authorObject) => new Promise((resolve, reject) => {
+  axios.patch(`${dbUrl}/author/${firebaseKey}.json`, authorObject)
+    .then(() => getAuthors(firebase.auth().currentUser.uid).then((booksArray) => resolve(booksArray)))
+    .catch((error) => reject(error));
+});
 // SEARCH AUTHORS
 export {
-  createAuthor, getAuthors, getFavoriteAuthors, deleteAuthor
+  createAuthor, getAuthors, getFavoriteAuthors, deleteAuthor, getSingleAuthor, updateAuthor
 };
